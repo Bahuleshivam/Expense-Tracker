@@ -7,7 +7,9 @@ import { DeleteForever } from '@mui/icons-material';
 
 const Notes = () => {
 
-  const { income, expense } = useContext(MyContext);
+  const { income, expense, deleteIncome, deleteExpense } = useContext(MyContext);
+
+  
 
   return (
     <div className='notes-container'>
@@ -22,10 +24,13 @@ const Notes = () => {
 
               return <div className='todo' key={index}>
                 <div className="subDiv">
-                  <p>{item.description}</p>
+                  <p style={{ width: '60%' }} >{item.description}</p>
                   <h3> ₹ {item.amount}</h3>
                 </div>
-                <DeleteForever className='note-delete-btn' />
+                <span onClick={() => deleteIncome(index)}>
+                <DeleteForever  className='note-delete-btn' />
+
+                </span>
               </div>
             })
           )}
@@ -44,7 +49,10 @@ const Notes = () => {
                   <p style={{ width: '60%' }} >{item.description}</p>
                   <h3> ₹ {item.amount}</h3>
                 </div>
+                <span onClick={() => deleteExpense(index)}>
                 <DeleteForever className='note-delete-btn' />
+
+                </span>
               </div>
             })
 

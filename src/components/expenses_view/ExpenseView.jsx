@@ -9,10 +9,24 @@ const ExpenseView = () => {
     useContext(MyContext);
 
   function onAddExpense() {
-    if (data.type.income ) {
+
+    if(data.description === '') {
+      alert('Please Enter Description')
+      return;
+    }
+    if(data.amount === ''){
+      alert('Please Enter Amount')
+      return;
+    }
+    if(data.type.income === false && data.type.expense === false){
+      alert('Select Income OR Expense')
+      return;
+    }
+
+    if (data.type.income) {
       setIncome((prevIncome) => [...prevIncome, data]);
     }
-    if (data.type.expense ) {
+    if (data.type.expense) {
       setExpense((prevExp) => [...prevExp, data]);
     }
 
@@ -22,7 +36,8 @@ const ExpenseView = () => {
   return (
     <div className="expenseView-component">
       <div className="expenseView">
-        <h1 className="total-balance media-screen ">Total Balance <span className="balance-color" style={{color: incomeAmount - expenseAmount >= 0 ? 'blue' : 'red'}} > ₹  {incomeAmount - expenseAmount}</span> </h1>
+        <h1 className="total-balance media-screen ">Total Balance <span className="balance-color"
+          style={{ color: incomeAmount - expenseAmount >= 0 ? 'blue' : 'red' }} > ₹  {incomeAmount - expenseAmount}</span> </h1>
 
         <div className="income income-bg-color">
           <h1 className="media-screen income-color"> ₹ {incomeAmount}</h1>
@@ -42,10 +57,10 @@ const ExpenseView = () => {
           style={{ display: data.visible ? "flex" : "none" }}
         >
           <Close className="cancle-btn"
-              type="submit"
-              onClick={() => setData({ ...data, visible: false })}/>
+            type="submit"
+            onClick={() => setData({ ...data, visible: false })} />
           <h3 className="form-heading">Add New Transaction</h3>
-          
+
           <div className="form-inputs">
             <label htmlFor="Discription" className="form-label">
               Enter Description
@@ -114,12 +129,12 @@ const ExpenseView = () => {
               Expense
             </span>
           </div>
-          
-           
-            <button className="add-btn" type="submit" onClick={onAddExpense}>
-              Add
-            </button>
-          
+
+
+          <button className="add-btn" type="submit" onClick={onAddExpense}>
+            Add
+          </button>
+
         </div>
       </div>
     </div>
